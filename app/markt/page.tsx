@@ -5,7 +5,7 @@ import TradingViewWidget from "@/components/TradingViewWidget";
 export const metadata: Metadata = {
   title: "Live Beurskoersen Vandaag",
   description:
-    "Bekijk live beurskoersen van ASML, Apple, NVIDIA, Tesla, Amazon en de belangrijkste indices. Gratis en in begrijpelijke taal uitgelegd.",
+    "Bekijk live beurskoersen van ASML, Apple, NVIDIA, Tesla, Amazon en populaire ETF's. Gratis en in begrijpelijke taal uitgelegd.",
   alternates: { canonical: "/markt" }
 };
 
@@ -29,7 +29,9 @@ export default function MarktPage() {
               { proName: "NASDAQ:AAPL", title: "Apple" },
               { proName: "NASDAQ:NVDA", title: "NVIDIA" },
               { proName: "NASDAQ:TSLA", title: "Tesla" },
-              { proName: "NASDAQ:AMZN", title: "Amazon" }
+              { proName: "NASDAQ:AMZN", title: "Amazon" },
+              { proName: "AMEX:SPY", title: "S&P 500 (SPY)" },
+              { proName: "NASDAQ:QQQ", title: "NASDAQ 100 (QQQ)" }
             ],
             showSymbolLogo: true,
             isTransparent: false,
@@ -45,17 +47,22 @@ export default function MarktPage() {
         </p>
       </section>
 
-      {/* MARKET OVERVIEW — drie losse mini-charts */}
+      {/* POPULAIRE ETF'S */}
       <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4">Belangrijkste indices</h2>
+        <h2 className="text-2xl font-bold mb-2">Populaire markten</h2>
+        <p className="text-slate-600 mb-4 text-sm">
+          De koers van indices zoals AEX, S&amp;P 500 en NASDAQ zelf is alleen op
+          TradingView te bekijken. Hieronder zie je de bijbehorende ETF&apos;s — dat
+          zijn de instrumenten waarmee jij zélf in die markten kunt beleggen.
+        </p>
         <div className="grid md:grid-cols-3 gap-4">
           <TradingViewWidget
-            height={220}
+            height={240}
             scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
             config={{
-              symbol: "EURONEXT:AEX",
+              symbol: "AMEX:SPY",
               width: "100%",
-              height: 220,
+              height: 240,
               locale: "nl_NL",
               dateRange: "12M",
               colorTheme: "light",
@@ -65,12 +72,12 @@ export default function MarktPage() {
             }}
           />
           <TradingViewWidget
-            height={220}
+            height={240}
             scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
             config={{
-              symbol: "SP:SPX",
+              symbol: "NASDAQ:QQQ",
               width: "100%",
-              height: 220,
+              height: 240,
               locale: "nl_NL",
               dateRange: "12M",
               colorTheme: "light",
@@ -80,12 +87,12 @@ export default function MarktPage() {
             }}
           />
           <TradingViewWidget
-            height={220}
+            height={240}
             scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
             config={{
-              symbol: "NASDAQ:IXIC",
+              symbol: "AMEX:VT",
               width: "100%",
-              height: 220,
+              height: 240,
               locale: "nl_NL",
               dateRange: "12M",
               colorTheme: "light",
@@ -96,9 +103,10 @@ export default function MarktPage() {
           />
         </div>
         <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
-          <strong>Wat betekent dit voor jou als beginner?</strong> Indices zoals AEX
-          en S&amp;P 500 zijn een mandje aandelen. Je kunt hierin beleggen via ETF&apos;s —
-          dat geeft direct spreiding zonder zelf 500 aandelen te kopen.
+          <strong>Wat zie je hier?</strong> SPY volgt de S&amp;P 500 (500 grootste
+          Amerikaanse bedrijven). QQQ volgt de NASDAQ-100 (tech-zwaar). VT volgt
+          de hele wereld in één ETF. Eén aandeel kopen in zo&apos;n ETF geeft je
+          direct spreiding over honderden of duizenden bedrijven.
         </p>
       </section>
 

@@ -6,10 +6,9 @@ export default function Footer() {
     <footer className="bg-ji-dark text-slate-300 mt-16">
       <div className="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8">
         <div>
-          <div className="flex items-center gap-2 font-bold text-white text-lg mb-3">
+          <div className="mb-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="JongInvesteerder" className="h-9 w-auto" />
-            JongInvesteerder
+            <img src="/logo.png" alt="JongInvesteerder" className="h-14 w-auto" />
           </div>
           <p className="text-sm">
             Eerlijke vergelijkingen voor jongeren die willen beginnen met beleggen.
