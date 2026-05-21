@@ -25,8 +25,13 @@ export default async function NieuwsPage() {
             href={`/nieuws/${n.slug}`}
             className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col"
           >
-            <div className="aspect-video bg-ji-light grid place-items-center text-ji-teal text-4xl font-bold">
-              {n.category[0]}
+            <div className="aspect-video bg-ji-light overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={n.afbeelding_url}
+                alt={n.titel}
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="p-5 flex-1 flex flex-col">
               <span className="inline-block bg-ji-teal/10 text-ji-teal text-xs font-semibold px-2 py-1 rounded mb-2 self-start">

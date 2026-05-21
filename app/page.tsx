@@ -85,16 +85,26 @@ export default async function Home() {
               <Link
                 key={n.id}
                 href={`/nieuws/${n.slug}`}
-                className="bg-white border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow"
+                className="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col"
               >
-                <span className="inline-block bg-ji-teal/10 text-ji-teal text-xs font-semibold px-2 py-1 rounded mb-3">
-                  {n.category}
-                </span>
-                <h3 className="font-bold text-ji-dark mb-2">{n.titel}</h3>
-                <p className="text-sm text-slate-600 mb-3">{n.samenvatting}</p>
-                <p className="text-xs text-slate-400">
-                  {new Date(n.gepubliceerd_op).toLocaleDateString("nl-NL")} · {n.leestijd_minuten} min lezen
-                </p>
+                <div className="aspect-video bg-ji-light overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={n.afbeelding_url}
+                    alt={n.titel}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-5 flex-1 flex flex-col">
+                  <span className="inline-block bg-ji-teal/10 text-ji-teal text-xs font-semibold px-2 py-1 rounded mb-2 self-start">
+                    {n.category}
+                  </span>
+                  <h3 className="font-bold text-ji-dark mb-2">{n.titel}</h3>
+                  <p className="text-sm text-slate-600 mb-3 flex-1">{n.samenvatting}</p>
+                  <p className="text-xs text-slate-400">
+                    {new Date(n.gepubliceerd_op).toLocaleDateString("nl-NL")} · {n.leestijd_minuten} min lezen
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

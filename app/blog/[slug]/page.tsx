@@ -33,8 +33,13 @@ export default async function BlogArtikel({ params }: Props) {
   return (
     <article className="max-w-3xl mx-auto px-4 py-12">
       <Link href="/blog" className="text-ji-teal text-sm hover:underline">← Terug naar blog</Link>
-      <div className="aspect-video bg-ji-dark rounded-xl mt-6 mb-8 grid place-items-center text-ji-teal text-6xl font-bold">
-        {item.category[0]}
+      <div className="aspect-video bg-ji-light rounded-xl mt-6 mb-8 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.afbeelding_url}
+          alt={item.titel}
+          className="w-full h-full object-cover"
+        />
       </div>
       <span className="inline-block bg-ji-teal/10 text-ji-teal text-xs font-semibold px-2 py-1 rounded mb-3">
         {item.category}
