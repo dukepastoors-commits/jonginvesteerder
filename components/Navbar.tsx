@@ -13,8 +13,10 @@ export default function Navbar() {
     <header className="bg-ji-dark text-white sticky top-0 z-40 shadow">
       <div className="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center" aria-label="JongInvesteerder homepage">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="JongInvesteerder" className="h-14 w-auto" />
+          <span className="text-2xl md:text-3xl font-extrabold tracking-tight">
+            <span className="text-white">Jong</span>
+            <span className="text-ji-teal">Investeerder</span>
+          </span>
         </Link>
         <nav className="hidden md:flex gap-6 text-sm">
           {links.map(l => (

@@ -5,21 +5,77 @@ import TradingViewWidget from "@/components/TradingViewWidget";
 export const metadata: Metadata = {
   title: "Live Beurskoersen Vandaag",
   description:
-    "Bekijk live beurskoersen van ASML, Apple, NVIDIA, Tesla, Amazon en populaire ETF's. Gratis en in begrijpelijke taal uitgelegd.",
+    "Live beurskoersen van ASML, Apple, NVIDIA, Tesla, Amazon en populaire ETF's. Begrijpelijk uitgelegd voor jonge beleggers.",
   alternates: { canonical: "/markt" }
 };
+
+// Statische marktfeiten (gemiddelde rendementen, geen live data — voor educatieve context)
+const marktKerngetallen = [
+  {
+    naam: "S&P 500",
+    omschrijving: "500 grootste Amerikaanse bedrijven",
+    gemiddeldRendement: "≈ 10% per jaar",
+    horizon: "100 jaar gemiddelde",
+    etfTicker: "SPY / IVV / VUSA"
+  },
+  {
+    naam: "MSCI World",
+    omschrijving: "1500+ bedrijven uit ontwikkelde landen wereldwijd",
+    gemiddeldRendement: "≈ 8% per jaar",
+    horizon: "50 jaar gemiddelde",
+    etfTicker: "IWDA / VWRL"
+  },
+  {
+    naam: "AEX",
+    omschrijving: "25 grootste bedrijven aan de Amsterdamse beurs",
+    gemiddeldRendement: "≈ 7% per jaar",
+    horizon: "40 jaar gemiddelde",
+    etfTicker: "iShares AEX UCITS"
+  },
+  {
+    naam: "NASDAQ-100",
+    omschrijving: "100 grootste niet-financiële tech-bedrijven",
+    gemiddeldRendement: "≈ 12% per jaar",
+    horizon: "30 jaar gemiddelde",
+    etfTicker: "QQQ / EQQQ"
+  }
+];
+
+const uitlegBegrippen = [
+  {
+    term: "Koers",
+    uitleg:
+      "De prijs van één aandeel of ETF op dit moment. Wijzigt elke seconde dat de beurs open is."
+  },
+  {
+    term: "Index",
+    uitleg:
+      "Een lijstje van bedrijven samen, zoals de AEX of S&P 500. Je kunt er via een ETF in beleggen."
+  },
+  {
+    term: "ETF",
+    uitleg:
+      "Een mandje met aandelen dat een index volgt. Eén ETF kopen = direct gespreid in honderden bedrijven."
+  },
+  {
+    term: "Rendement",
+    uitleg:
+      "Hoeveel je geld is gegroeid. 8% per jaar betekent dat €100 na een jaar €108 waard is (gemiddeld)."
+  }
+];
 
 export default function MarktPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-extrabold mb-3">Live beurskoersen</h1>
       <p className="text-slate-600 max-w-2xl mb-10">
-        Volg in real-time wat er op de beurs gebeurt. We leggen onder elke grafiek
-        uit wat het voor jou betekent als beginner.
+        Volg in real-time wat er op de beurs gebeurt. We leggen alles uit in
+        normale taal — geen jargon.
       </p>
 
-      {/* TICKER TAPE */}
-      <section className="mb-10">
+      {/* LIVE TICKER TAPE */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-4">Live koersen — nu</h2>
         <TradingViewWidget
           height={80}
           scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
@@ -30,8 +86,12 @@ export default function MarktPage() {
               { proName: "NASDAQ:NVDA", title: "NVIDIA" },
               { proName: "NASDAQ:TSLA", title: "Tesla" },
               { proName: "NASDAQ:AMZN", title: "Amazon" },
-              { proName: "AMEX:SPY", title: "S&P 500 (SPY)" },
-              { proName: "NASDAQ:QQQ", title: "NASDAQ 100 (QQQ)" }
+              { proName: "NASDAQ:MSFT", title: "Microsoft" },
+              { proName: "NASDAQ:GOOGL", title: "Google" },
+              { proName: "AMEX:SPY", title: "S&P 500 ETF" },
+              { proName: "NASDAQ:QQQ", title: "NASDAQ ETF" },
+              { proName: "BITSTAMP:BTCUSD", title: "Bitcoin" },
+              { proName: "BITSTAMP:ETHUSD", title: "Ethereum" }
             ],
             showSymbolLogo: true,
             isTransparent: false,
@@ -40,116 +100,75 @@ export default function MarktPage() {
             locale: "nl_NL"
           }}
         />
-        <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
-          <strong>Wat betekent dit voor jou als beginner?</strong> De ticker laat
-          actuele koersen zien. Groen = stijging, rood = daling. Voor lange-termijn
-          beleggen zijn dagelijkse bewegingen meestal niet belangrijk.
-        </p>
-      </section>
-
-      {/* POPULAIRE ETF'S */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-2">Populaire markten</h2>
-        <p className="text-slate-600 mb-4 text-sm">
-          De koers van indices zoals AEX, S&amp;P 500 en NASDAQ zelf is alleen op
-          TradingView te bekijken. Hieronder zie je de bijbehorende ETF&apos;s — dat
-          zijn de instrumenten waarmee jij zélf in die markten kunt beleggen.
-        </p>
-        <div className="grid md:grid-cols-3 gap-4">
-          <TradingViewWidget
-            height={240}
-            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
-            config={{
-              symbol: "AMEX:SPY",
-              width: "100%",
-              height: 240,
-              locale: "nl_NL",
-              dateRange: "12M",
-              colorTheme: "light",
-              isTransparent: false,
-              autosize: true,
-              largeChartUrl: ""
-            }}
-          />
-          <TradingViewWidget
-            height={240}
-            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
-            config={{
-              symbol: "NASDAQ:QQQ",
-              width: "100%",
-              height: 240,
-              locale: "nl_NL",
-              dateRange: "12M",
-              colorTheme: "light",
-              isTransparent: false,
-              autosize: true,
-              largeChartUrl: ""
-            }}
-          />
-          <TradingViewWidget
-            height={240}
-            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
-            config={{
-              symbol: "AMEX:VT",
-              width: "100%",
-              height: 240,
-              locale: "nl_NL",
-              dateRange: "12M",
-              colorTheme: "light",
-              isTransparent: false,
-              autosize: true,
-              largeChartUrl: ""
-            }}
-          />
+        <div className="grid sm:grid-cols-3 gap-3 mt-4">
+          <div className="bg-ji-light rounded-lg p-4 text-sm">
+            <div className="font-semibold text-ji-dark mb-1">🟢 Groen</div>
+            <p className="text-slate-600">Koers is gestegen vandaag.</p>
+          </div>
+          <div className="bg-ji-light rounded-lg p-4 text-sm">
+            <div className="font-semibold text-ji-dark mb-1">🔴 Rood</div>
+            <p className="text-slate-600">Koers is gedaald vandaag.</p>
+          </div>
+          <div className="bg-ji-light rounded-lg p-4 text-sm">
+            <div className="font-semibold text-ji-dark mb-1">📊 Percentage</div>
+            <p className="text-slate-600">Verandering t.o.v. gisteren&apos;s slot.</p>
+          </div>
         </div>
-        <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
-          <strong>Wat zie je hier?</strong> SPY volgt de S&amp;P 500 (500 grootste
-          Amerikaanse bedrijven). QQQ volgt de NASDAQ-100 (tech-zwaar). VT volgt
-          de hele wereld in één ETF. Eén aandeel kopen in zo&apos;n ETF geeft je
-          direct spreiding over honderden of duizenden bedrijven.
+      </section>
+
+      {/* MARKTEN OVERZICHT — STATISCHE DATA */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-2">Gemiddelde markt-rendementen</h2>
+        <p className="text-slate-600 text-sm mb-6 max-w-3xl">
+          Live koersen veranderen elke seconde — maar wat telt voor lange-termijn
+          beleggen is het gemiddelde rendement over jaren. Hieronder de cijfers
+          waar je écht iets aan hebt als je net begint.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {marktKerngetallen.map(m => (
+            <div
+              key={m.naam}
+              className="bg-white border border-slate-200 rounded-xl p-5 hover:shadow-md transition-shadow"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="font-bold text-ji-dark text-lg">{m.naam}</h3>
+                <span className="text-ji-teal font-extrabold text-xl">
+                  {m.gemiddeldRendement}
+                </span>
+              </div>
+              <p className="text-sm text-slate-600 mb-3">{m.omschrijving}</p>
+              <div className="flex justify-between text-xs text-slate-500 border-t border-slate-100 pt-3">
+                <span>{m.horizon}</span>
+                <span className="font-mono">{m.etfTicker}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-slate-500 mt-4">
+          * Historische gemiddelden zijn geen garantie voor toekomstig rendement.
+          Inflatie en kosten zijn niet meegenomen.
         </p>
       </section>
 
-      {/* SINGLE CHART — ASML */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4">Featured: ASML</h2>
-        <TradingViewWidget
-          height={500}
-          scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-          config={{
-            symbols: [["ASML", "NASDAQ:ASML|12M"]],
-            chartOnly: false,
-            width: "100%",
-            height: 500,
-            locale: "nl_NL",
-            colorTheme: "light",
-            isTransparent: false,
-            autosize: true,
-            showVolume: false,
-            showMA: false,
-            hideDateRanges: false,
-            hideMarketStatus: false,
-            scalePosition: "right",
-            scaleMode: "Normal",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "10",
-            noTimeScale: false,
-            valuesTracking: "1",
-            changeMode: "price-and-percent",
-            chartType: "area"
-          }}
-        />
-        <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
-          <strong>Wat betekent dit voor jou als beginner?</strong> ASML is een
-          Nederlands tech-bedrijf en zwaargewicht in de AEX. Eén aandeel kopen is
-          duur — ETF&apos;s of fractioneel beleggen maken dit toegankelijker.
-        </p>
+      {/* BEGRIPPEN */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold mb-6">Begrippen uitgelegd</h2>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {uitlegBegrippen.map(b => (
+            <div key={b.term} className="bg-ji-light rounded-xl p-5">
+              <h3 className="font-bold text-ji-dark mb-2">{b.term}</h3>
+              <p className="text-sm text-slate-700">{b.uitleg}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* CTA */}
       <section className="bg-ji-dark text-white rounded-xl p-10 text-center mt-12">
         <h2 className="text-3xl font-bold mb-3">Klaar om te beginnen?</h2>
-        <p className="text-slate-300 mb-6">Vergelijk hier de beste apps</p>
+        <p className="text-slate-300 mb-6">
+          Vergelijk hier de beste apps om zelf in deze markten te beleggen.
+        </p>
         <Link
           href="/vergelijk"
           className="inline-block bg-ji-teal text-ji-dark font-bold px-8 py-3 rounded-md hover:opacity-90"
