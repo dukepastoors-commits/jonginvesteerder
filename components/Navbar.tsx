@@ -13,8 +13,9 @@ export default function Navbar() {
     <header className="bg-ji-dark text-white sticky top-0 z-40 shadow">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <span className="inline-block w-8 h-8 rounded-md bg-ji-teal grid place-items-center text-ji-dark">J</span>
-          <span>JongInvesteerder</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="JongInvesteerder" className="h-10 w-auto" />
+          <span className="hidden sm:inline">JongInvesteerder</span>
         </Link>
         <nav className="hidden md:flex gap-6 text-sm">
           {links.map(l => (

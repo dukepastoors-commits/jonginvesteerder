@@ -1,15 +1,14 @@
 import Link from "next/link";
 import Stars from "./Stars";
 import AffiliateButton from "./AffiliateButton";
+import AppLogo from "./AppLogo";
 import type { App } from "@/lib/types";
 
 export default function AppCard({ app }: { app: App }) {
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col">
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-12 h-12 rounded-md bg-ji-light grid place-items-center font-bold text-ji-dark">
-          {app.naam.slice(0, 2)}
-        </div>
+        <AppLogo src={app.logo_url} naam={app.naam} size={48} />
         <div>
           <h3 className="font-bold text-ji-dark">{app.naam}</h3>
           <Stars rating={app.beoordeling} />

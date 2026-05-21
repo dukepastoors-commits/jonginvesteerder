@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Stars from "@/components/Stars";
 import AffiliateButton from "@/components/AffiliateButton";
+import AppLogo from "@/components/AppLogo";
 import { getApp, getApps } from "@/lib/data";
 
 type Props = { params: { slug: string } };
@@ -35,9 +36,7 @@ export default async function AppReview({ params }: Props) {
       <Link href="/vergelijk" className="text-ji-teal text-sm hover:underline">← Terug naar vergelijking</Link>
 
       <header className="mt-6 mb-10 flex flex-wrap items-center gap-6">
-        <div className="w-20 h-20 rounded-lg bg-ji-light grid place-items-center font-bold text-2xl text-ji-dark">
-          {app.naam.slice(0, 2)}
-        </div>
+        <AppLogo src={app.logo_url} naam={app.naam} size={80} />
         <div className="flex-1">
           <h1 className="text-4xl font-extrabold">{app.naam}</h1>
           <Stars rating={app.beoordeling} />

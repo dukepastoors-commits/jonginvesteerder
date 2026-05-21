@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import Stars from "@/components/Stars";
 import AffiliateButton from "@/components/AffiliateButton";
+import AppLogo from "@/components/AppLogo";
 import type { App } from "@/lib/types";
 
 export default function VergelijkClient({ apps }: { apps: App[] }) {
@@ -96,9 +97,7 @@ export default function VergelijkClient({ apps }: { apps: App[] }) {
               <tr key={a.id} className="border-t border-slate-100 hover:bg-ji-light/50">
                 <td className="px-4 py-4">
                   <Link href={`/app/${a.slug}`} className="flex items-center gap-3 font-semibold text-ji-dark hover:text-ji-teal">
-                    <span className="w-10 h-10 rounded-md bg-ji-light grid place-items-center text-xs font-bold">
-                      {a.naam.slice(0, 2)}
-                    </span>
+                    <AppLogo src={a.logo_url} naam={a.naam} size={40} />
                     {a.naam}
                   </Link>
                 </td>

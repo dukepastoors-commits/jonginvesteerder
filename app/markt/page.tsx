@@ -25,7 +25,7 @@ export default function MarktPage() {
           scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
           config={{
             symbols: [
-              { proName: "AMEX:ASML", title: "ASML" },
+              { proName: "NASDAQ:ASML", title: "ASML" },
               { proName: "NASDAQ:AAPL", title: "Apple" },
               { proName: "NASDAQ:NVDA", title: "NVIDIA" },
               { proName: "NASDAQ:TSLA", title: "Tesla" },
@@ -45,49 +45,71 @@ export default function MarktPage() {
         </p>
       </section>
 
-      {/* MARKET OVERVIEW */}
+      {/* MARKET OVERVIEW — drie losse mini-charts */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold mb-4">Belangrijkste indices</h2>
-        <TradingViewWidget
-          height={500}
-          scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js"
-          config={{
-            colorTheme: "light",
-            dateRange: "12M",
-            showChart: true,
-            locale: "nl_NL",
-            largeChartUrl: "",
-            isTransparent: false,
-            showSymbolLogo: true,
-            width: "100%",
-            height: 500,
-            tabs: [
-              {
-                title: "Indices",
-                symbols: [
-                  { s: "EURONEXT:AEX", d: "AEX" },
-                  { s: "FOREXCOM:SPXUSD", d: "S&P 500" },
-                  { s: "NASDAQ:IXIC", d: "NASDAQ" }
-                ]
-              }
-            ]
-          }}
-        />
+        <div className="grid md:grid-cols-3 gap-4">
+          <TradingViewWidget
+            height={220}
+            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
+            config={{
+              symbol: "EURONEXT:AEX",
+              width: "100%",
+              height: 220,
+              locale: "nl_NL",
+              dateRange: "12M",
+              colorTheme: "light",
+              isTransparent: false,
+              autosize: true,
+              largeChartUrl: ""
+            }}
+          />
+          <TradingViewWidget
+            height={220}
+            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
+            config={{
+              symbol: "SP:SPX",
+              width: "100%",
+              height: 220,
+              locale: "nl_NL",
+              dateRange: "12M",
+              colorTheme: "light",
+              isTransparent: false,
+              autosize: true,
+              largeChartUrl: ""
+            }}
+          />
+          <TradingViewWidget
+            height={220}
+            scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
+            config={{
+              symbol: "NASDAQ:IXIC",
+              width: "100%",
+              height: 220,
+              locale: "nl_NL",
+              dateRange: "12M",
+              colorTheme: "light",
+              isTransparent: false,
+              autosize: true,
+              largeChartUrl: ""
+            }}
+          />
+        </div>
         <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
           <strong>Wat betekent dit voor jou als beginner?</strong> Indices zoals AEX
-          en S&P 500 zijn een mandje aandelen. Je kunt hierin beleggen via ETF&apos;s —
+          en S&amp;P 500 zijn een mandje aandelen. Je kunt hierin beleggen via ETF&apos;s —
           dat geeft direct spreiding zonder zelf 500 aandelen te kopen.
         </p>
       </section>
 
-      {/* SINGLE CHART */}
+      {/* SINGLE CHART — ASML */}
       <section className="mb-10">
         <h2 className="text-2xl font-bold mb-4">Featured: ASML</h2>
         <TradingViewWidget
           height={500}
           scriptSrc="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
           config={{
-            symbols: [["ASML", "AMEX:ASML|12M"]],
+            symbols: [["ASML", "NASDAQ:ASML|12M"]],
             chartOnly: false,
             width: "100%",
             height: 500,
@@ -98,7 +120,15 @@ export default function MarktPage() {
             showVolume: false,
             showMA: false,
             hideDateRanges: false,
-            hideMarketStatus: false
+            hideMarketStatus: false,
+            scalePosition: "right",
+            scaleMode: "Normal",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "10",
+            noTimeScale: false,
+            valuesTracking: "1",
+            changeMode: "price-and-percent",
+            chartType: "area"
           }}
         />
         <p className="text-sm text-slate-600 mt-3 bg-ji-light p-4 rounded-lg">
