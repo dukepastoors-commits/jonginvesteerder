@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getBlog } from "@/lib/data";
 
+export const revalidate = 1800;
+
 export const metadata: Metadata = {
   title: "Leer Beleggen — Tips & Uitleg",
   description:

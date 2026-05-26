@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getNieuws } from "@/lib/data";
 
+// Elke 30 min de nieuwste artikelen ophalen
+export const revalidate = 1800;
+
 export const metadata: Metadata = {
   title: "Laatste Beursnieuws voor Beginners",
   description:

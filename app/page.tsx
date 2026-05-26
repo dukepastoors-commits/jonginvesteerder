@@ -4,6 +4,8 @@ import AppCard from "@/components/AppCard";
 import FAQ from "@/components/FAQ";
 import { getApps, getNieuws } from "@/lib/data";
 
+export const revalidate = 1800;
+
 export const metadata: Metadata = {
   title: "Beste Beleggingsapp voor Beginners 2026",
   description:

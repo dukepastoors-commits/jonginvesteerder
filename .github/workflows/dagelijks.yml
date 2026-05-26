@@ -1,0 +1,31 @@
+name: Dagelijkse artikel generatie
+
+on:
+  schedule:
+    # Elke ochtend 06:00 UTC = 07:00 NL winter / 08:00 NL zomer
+    - cron: "0 6 * * *"
+  workflow_dispatch: # handmatig testen via GitHub UI
+
+jobs:
+  genereer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run artikel generator
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npx tsx scripts/genereer-artikelen.ts
